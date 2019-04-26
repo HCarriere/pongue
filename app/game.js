@@ -5,6 +5,8 @@ let Pong = require('../shared/pong').Pong;
 const SHORT_LOOP_FREQ = 100;
 const LONG_LOOP_FREQ = 2000;
 
+let pongShortInstance;
+let pongLongInstance;
 let players = {};
 let leftPlayers = 0;
 let rightPlayers = 0;
@@ -54,7 +56,7 @@ function init(http) {
 }
 
 function gameLoops(io) {
-    setInterval(() => {
+    pongShortInstance = setInterval(() => {
         // SHORT LOOP
         pong.processFrame();
 
@@ -65,7 +67,7 @@ function gameLoops(io) {
         }
     }, SHORT_LOOP_FREQ);
 
-    setInterval(() => {
+    pongLongInstance = setInterval(() => {
         // LONG LOOP
 
         io.emit('gameSynchronisation', pong.getSynchronisation());

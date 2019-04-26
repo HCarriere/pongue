@@ -8,5 +8,5 @@ module.exports = {
         path: path.resolve(__dirname, 'views/assets/js/dist'),
         filename: '[name].js'
     },
-    mode:'development'
+    mode:'production'
 };

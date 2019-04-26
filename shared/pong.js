@@ -133,8 +133,8 @@ class Brick {
      * @param {Ball} ball 
      */
     isColliding(ball) {
-        if(ball.x < this.x + this.width && ball.x > this.x - this.width &&
-            ball.y < this.y + this.height && ball.y > this.y - this.height) {
+        if(ball.x < this.x + this.width && ball.x > this.x &&
+            ball.y < this.y + this.height && ball.y > this.y) {
             return true;
         }
         return false;

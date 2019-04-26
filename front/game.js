@@ -59,7 +59,7 @@ function loop() {
         }
         drawPong(pong);
     }
-    showDebug();
+    // showDebug();
     
     // get fps & delta time
     Context.fps = getFPS();
