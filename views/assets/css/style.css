@@ -14,3 +14,10 @@ canvas {
     width:100%;
     height:auto;
 }
+
+.description {
+    color: white;
+    text-align: center;
+    font-family: 'calibri';
+    padding-top: 10%;
+}
