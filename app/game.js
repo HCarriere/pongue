@@ -69,8 +69,9 @@ function gameLoops(io) {
 
     pongLongInstance = setInterval(() => {
         // LONG LOOP
-
-        io.emit('gameSynchronisation', pong.getSynchronisation());
+        if(rightPlayers>0 || leftPlayers>0) {
+            io.emit('gameSynchronisation', pong.getSynchronisation());
+        }
 
     }, LONG_LOOP_FREQ);
 }
