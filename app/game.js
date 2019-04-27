@@ -33,11 +33,15 @@ function init(http) {
             leftPlayers++;
         }
 
-        socket.emit('connected', player);
+        socket.emit('connected', {
+            player: player,
+            pong: pong.getSynchronisation(),
+        });
 
         socket.on('playerInfo', data => {
             processPlayerInfo(data, player);
         });
+
 
         socket.on('disconnect', () => {
             if(player.side == 'right') {
@@ -63,6 +67,8 @@ function gameLoops(io) {
         if(gameInformations.left.length > 0 || gameInformations.right.length > 0) {
             pong.processEvent(gameInformations);
             io.emit('gameInformations', gameInformations);
+           
+            // reset game informaions
             gameInformations = createGameInformations();
         }
     }, SHORT_LOOP_FREQ);

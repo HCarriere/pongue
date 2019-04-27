@@ -37,9 +37,11 @@ let inputCache = [];
 
 let loopStopped = true;
 
-function init() {
+function init(pongState) {
 
     pong = new Pong();
+
+    pong.synchronize(pongState);
 
     initInputNetworkEventLoop();
 
@@ -190,10 +192,10 @@ document.addEventListener('DOMContentLoaded', function() {
     initCanvas();
 
     socket = io();
-    initSocketEvents(p => {
-        player = p;
+    initSocketEvents(data => {
+        player = data.player;
 
-        init();
+        init(data.pong);
     });
 
     loop();
