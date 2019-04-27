@@ -82,6 +82,14 @@ function initCanvas() {
     window.onresize = resizeCanvas;
     window.onkeydown = event => onKeyDown(event);
     window.onkeyup = event => onKeyUp(event);
+    window.onmousemove = event => onMouseMove(event);
+    window.onmousedown = event => onMouseDown(event);
+    window.onmouseup = event => onMouseUp(event);
+    window.ontouchmove = event => onTouchMove(event);
+    window.ontouchstart = event => onTouchStart(event);
+    window.ontouchend = event => onTouchEnd(event);
+    window.ontouchcancel =  event => onTouchEnd(event);
+
     Context.canvas.addEventListener('contextmenu', event => event.preventDefault());
 
     // canvas size
@@ -104,6 +112,7 @@ function getFPS() {
     return (1/diff)*1000;
 }
 
+// debug
 
 export function journal(message){
     journalEntries.push({
@@ -130,6 +139,8 @@ function showDebug() {
         graphic.text('> '+journalEntries[i].message, 15, 150+i*20);
     }
 }
+
+// Network
 
 function initSocketEvents(callback) {
 
@@ -162,6 +173,15 @@ function emitNetworkEvent(data) {
     socket.emit('playerInfo', data);
 }
 
+function initInputNetworkEventLoop() {
+    setInterval(()=>{
+        emitNetworkEvent(inputCache);
+        inputCache = [];
+    }, 100);
+}
+
+// Input events
+
 function onKeyDown(event) {
     if(event.keyCode == 40) {
         inputCache.push('d');
@@ -179,13 +199,35 @@ function onKeyUp(event) {
         inputCache.push('u');
     }*/
 }
-
-function initInputNetworkEventLoop() {
-    setInterval(()=>{
-        emitNetworkEvent(inputCache);
-        inputCache = [];
-    }, 100);
+function onMouseMove(event) {
+}  
+function onMouseUp(event) {
+}  
+function onMouseDown(event) {
+    if(event.clientY < Context.height /2) {
+        // up
+        inputCache.push('u');
+    } else {
+        // down
+        inputCache.push('d');
+    }
 }
+
+function onTouchMove(event) {
+}
+function onTouchStart(event) {
+    if(event.changedTouches[0].pageY < Context.height /2) {
+        // up
+        inputCache.push('u');
+    } else {
+        // down
+        inputCache.push('d');
+    }
+}
+function onTouchEnd(event) {
+}
+
+// document ready
 
 document.addEventListener('DOMContentLoaded', function() {
 

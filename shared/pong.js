@@ -15,8 +15,8 @@ class Pong {
 
         /** @type {Ball[]} */
         this.balls = [
-            new Ball(50, 50, {x:2, y:Math.random()*2 - 1}),
-            // new Ball(50, 50, {x:-1, y:Math.random() - 0.5}),
+            new Ball(50, 50, {x:3, y:Math.random()*2 - 1}),
+            new Ball(50, 50, {x:-2, y:Math.random() - 0.5}),
         ];
 
         /** @type {Number} */
